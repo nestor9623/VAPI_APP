@@ -1,0 +1,24 @@
+<div class="detail">
+  <vapi-header
+    [title]="'Detalle del Vehículo'"
+    [subtitle]="'Modelos y tipos disponibles'"
+    [showBackButton]="true"
+    (backClick)="goBack()"
+  />
+
+  @if (vehicleData()) {
+    <div class="detail__content">
+      <div class="detail__column">
+        <h2 class="detail__subtitle">Modelos ({{ models().length }})</h2>
+        <vapi-table [data]="models()" />
+      </div>
+
+      <div class="detail__column">
+        <h2 class="detail__subtitle">Tipos ({{ types().length }})</h2>
+        <vapi-table [data]="types()" />
+      </div>
+    </div>
+  } @else {
+    <p class="detail__loading">Cargando datos...</p>
+  }
+</div>

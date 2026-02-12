@@ -1,23 +1,21 @@
-import { VehicleFilter } from './../../ports/vehicle/vehicle-filter.interface';
-import { Injectable, inject } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { UseCase } from '../../../base/use-case';
-import { VehicleRepository } from '../../../domain/repositories/vehicle/vehicle.repository';
-import { ApiResponse, Vehicle } from '../../../domain/entities';
-import { RawVehicleBrand } from '../../../domain/mappers/vehicle-brand.mapper';
-import { VehicleModelMapper } from '../../../domain/mappers/vehicle-model.mapper';
-@Injectable({ providedIn: 'root' })
-export class GetVehicleModelsByIdUseCase implements UseCase<number, ApiResponse<RawVehicleBrand>> {
-  private readonly _vehicleRepository = inject(VehicleRepository);
-  private readonly _vehicleModelMapper = inject(VehicleModelMapper);
+import { Injectable, inject } from '@angular/core';
+import { VehicleItem, VehicleMapper } from '@core/domain/mappers/vehicle.mapper';
+import { ApiResponse, Vehicle } from '@core/domain/entities';
+import { UseCase } from '@core/base/use-case';
+import { VEHICLE_REPOSITORY } from 'app/app.config';
 
-  execute(id: number): Observable<ApiResponse<RawVehicleBrand>> {
-    return this._vehicleRepository.getVehicleModelsByBrand(id).pipe(map((response: ApiResponse<Vehicle>) => {
-      const mappedResults = response.results.map(vehicle => this._vehicleModelMapper.mapFrom(vehicle));
-      return {
+@Injectable({ providedIn: 'root' })
+export class GetVehicleModelsByIdUseCase implements UseCase<number, ApiResponse<VehicleItem>> {
+  private readonly _vehicleRepository = inject(VEHICLE_REPOSITORY);
+  private readonly _vehicleMapper = inject(VehicleMapper);
+
+  execute(id: number): Observable<ApiResponse<VehicleItem>> {
+    return this._vehicleRepository.getVehicleModelsByBrand(id).pipe(
+      map((response: ApiResponse<Vehicle>) => ({
         ...response,
-        results: mappedResults,
-      };
-    }));
+        Results: response.Results.map(vehicle => this._vehicleMapper.mapToModel(vehicle))
+      }))
+    );
   }
 }

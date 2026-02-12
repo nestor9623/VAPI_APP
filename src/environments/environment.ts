@@ -1,4 +1,4 @@
 export const environment = {
-  production: true,
-  apiUrl: 'https://vpic.nhtsa.dot.gov/api/vehicles',
+  production: false,
+  apiUrl: 'https://vpic.nhtsa.dot.gov/api/vehicles'
 };

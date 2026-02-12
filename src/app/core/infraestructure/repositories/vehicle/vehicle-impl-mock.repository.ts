@@ -1,11 +1,10 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-
-import { VehicleRepository } from '../../../domain/repositories/vehicle/vehicle.repository';
-import { ApiResponse, Vehicle } from '../../../domain/entities/index';
-import { VehicleFilter } from '../../../application/ports/vehicle/vehicle-filter.interface';
-import { environment } from '../../../../../environments/environment';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'environments/environment';
+import { ApiResponse, Vehicle } from '@core/domain/entities';
+import { VehicleRepository } from '@core/domain/repositories/vehicle/vehicle.repository';
+import { VehicleFilter } from '@core/application/ports/vehicle/vehicle-filter.interface';
 
 @Injectable({ providedIn: 'root' })
 export class VehicleImplMockRepository implements VehicleRepository {

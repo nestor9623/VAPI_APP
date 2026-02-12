@@ -1,0 +1,18 @@
+<div class="table">
+  <div class="table__header">
+    <div class="table__cell">ID</div>
+    <div class="table__cell">Descripción</div>
+  </div>
+
+  <cdk-virtual-scroll-viewport itemSize="48" class="table__viewport">
+    <div
+      *cdkVirtualFor="let item of data()"
+      class="table__row"
+      [class.table__row--selected]="selectedRow()?.id === item.id"
+      (click)="onSelectRow(item)"
+    >
+      <div class="table__cell">{{ item.id }}</div>
+      <div class="table__cell">{{ item.description }}</div>
+    </div>
+  </cdk-virtual-scroll-viewport>
+</div>

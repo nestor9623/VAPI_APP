@@ -1,0 +1,21 @@
+<div class="home-container">
+  <vapi-header
+    [title]="'Marcas de Vehículos'"
+    [subtitle]="'Explora todas las marcas disponibles'"
+  />
+
+  <filter (searchChange)="onSearch($event)"></filter>
+
+  @if (isLoading()) {
+    <vapi-spinner />
+  } @else {
+    <div class="table-wrapper">
+      <div class="table-info">
+        <span class="total-count">
+          Mostrando {{ filteredCount() }} de {{ totalElements() }} marcas
+        </span>
+      </div>
+      <vapi-table [data]="data()" (rowSelected)="onRowSelected($event)"/>
+    </div>
+  }
+</div>

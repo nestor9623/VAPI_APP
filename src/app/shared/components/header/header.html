@@ -1,0 +1,14 @@
+<header class="header">
+  <div class="header__actions">
+    @if (showBackButton()) {
+      <button mat-button class="header__back" (click)="onBackClick()" type="button">
+        <mat-icon class="header__back-icon">arrow_back</mat-icon>
+        Volver
+      </button>
+    }
+  </div>
+  <div class="header__content">
+    <h1 class="header__title">{{ title() }}</h1>
+    <p class="header__subtitle">{{ subtitle() }}</p>
+  </div>
+</header>

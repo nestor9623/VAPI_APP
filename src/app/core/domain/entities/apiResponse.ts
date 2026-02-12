@@ -1,6 +1,6 @@
 export interface ApiResponse<T> {
-  count: number;
-  message: string;
-  searchCriteria: string;
-  results: T[];
+  Count: number;
+  Message: string;
+  SearchCriteria: string;
+  Results: T[];
 }
