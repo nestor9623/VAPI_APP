@@ -12,7 +12,6 @@ export function debugStore() {
         console.log(`[DetailStore]`, {
           modelos: store["modelos"](),
           tipos: store["tipos"](),
-          loading: store["loading"](),
           error: store["error"](),
         });
       });

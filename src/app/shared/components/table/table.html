@@ -4,7 +4,7 @@
     <div class="table__cell">Descripción</div>
   </div>
 
-  <cdk-virtual-scroll-viewport itemSize="48" class="table__viewport">
+  <cdk-virtual-scroll-viewport itemSize="48" class="table__viewport" data-cy="table-viewport">
     <div
       *cdkVirtualFor="let item of data()"
       class="table__row"
