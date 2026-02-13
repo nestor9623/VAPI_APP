@@ -6,16 +6,16 @@
 
   <filter (searchChange)="onSearch($event)"></filter>
 
-  @if (isLoading()) {
+  @if (store.loading()) {
     <vapi-spinner />
   } @else {
     <div class="table-wrapper">
       <div class="table-info">
         <span class="total-count">
-          Mostrando {{ filteredCount() }} de {{ totalElements() }} marcas
+          Mostrando {{ store.filteredBrands().length }} de {{ store.totalCount() }} marcas
         </span>
       </div>
-      <vapi-table [data]="data()" (rowSelected)="onRowSelected($event)"/>
+      <vapi-table [data]="store.filteredBrands()" (rowSelected)="onRowSelected($event)"/>
     </div>
   }
 </div>

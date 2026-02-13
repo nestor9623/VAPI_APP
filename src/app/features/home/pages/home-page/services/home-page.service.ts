@@ -5,7 +5,7 @@ import { catchError, EMPTY, finalize, Observable, tap } from "rxjs";
 import { GetVehiclesUseCase } from "@core/application/use-cases/vehicle/get-vehicles.usecase";
 import { ApiResponse, FORMAT_STATES } from "@core/domain/entities";
 import { VehicleFilter } from "@core/application/ports/vehicle/vehicle-filter.interface";
-
+//TODO: Este servicio se puede eliminar y pasar toda la lógica al store, pero lo dejo así para mostrar un ejemplo de servicio con signals y rxjs
 @Injectable({ providedIn: 'root' })
 export class HomeService {
   private readonly _router = inject(Router);
@@ -47,10 +47,6 @@ export class HomeService {
           this.isLoading.set(false);
         })
       );
-  }
-
-  setSearchTerm(term: string): void {
-    this._searchTerm.set(term);
   }
 
   navigateToDetailWithId(id: number): void {

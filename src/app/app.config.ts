@@ -1,6 +1,6 @@
 import { ApplicationConfig, InjectionToken, provideBrowserGlobalErrorListeners, Provider } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { provideHttpClient, withFetch, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 
 import { routes } from './app.routes';
 import { VehicleImplRepository } from './core/infraestructure/repositories/vehicle/vehicle-impl.repository';
@@ -19,6 +19,11 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
     provideHttpClient(withFetch()),
-    ...REPOSITORIES
+    ...REPOSITORIES,
+    //TODO: Check if can show store in devtools with this
+    // provideStoreDevtools({
+    //   maxAge: 25,
+    //   logOnly: false,
+    // }),
   ]
 };

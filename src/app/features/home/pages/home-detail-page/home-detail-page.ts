@@ -1,10 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { TableComponent } from '@shared/components/table/table';
-import { VehicleItem } from '@core/domain/mappers/vehicle.mapper';
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { HeaderComponent } from '@shared/components/header/header';
-import { VehicleDetailData } from './resolver/home-detai-page-resolver.service';
+import { DetailStore } from '@core/store/detail-store';
 
 @Component({
   selector: 'vapi-home-detail-page',
@@ -13,25 +12,12 @@ import { VehicleDetailData } from './resolver/home-detai-page-resolver.service';
   templateUrl: './home-detail-page.html',
   styleUrl: './home-detail-page.scss',
 })
-export class HomeDetailPage implements OnInit {
-  private readonly _route = inject(ActivatedRoute);
+export class HomeDetailPage {
   private readonly _router = inject(Router);
 
-  vehicleData = signal<VehicleDetailData | null>(null);
-  models = signal<VehicleItem[]>([]);
-  types = signal<VehicleItem[]>([]);
-
-  ngOnInit(): void {
-    this._route.data.subscribe(data => {
-      const vehicleData = data['vehicleData'] as VehicleDetailData;
-
-      if (vehicleData) {
-        this.vehicleData.set(vehicleData);
-        this.models.set(vehicleData.models);
-        this.types.set(vehicleData.types);
-      }
-    });
-  }
+  readonly detailStore = inject(DetailStore);
+  readonly models = this.detailStore.modelos;
+  readonly types = this.detailStore.tipos;
 
   goBack(): void {
     this._router.navigate(['/home']);

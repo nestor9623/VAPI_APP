@@ -6,7 +6,7 @@
     (backClick)="goBack()"
   />
 
-  @if (vehicleData()) {
+  @if (models().length > 0 || types().length > 0) {
     <div class="detail__content">
       <div class="detail__column">
         <h2 class="detail__subtitle">Modelos ({{ models().length }})</h2>

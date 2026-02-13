@@ -1,13 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { HomeService } from './services/home-page.service';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { FilterComponent } from '@shared/components/filter/filter';
 import { TableComponent } from '@shared/components/table/table';
 import { HeaderComponent } from '@shared/components/header/header';
 import { SpinnerComponent } from '@shared/components/spinner/spinner';
 import { VehicleItem } from '@core/domain/mappers/vehicle.mapper';
-
+import { VehicleStore } from '@core/store/home-store';
 
 @Component({
   selector: 'vapi-home-page',
@@ -22,28 +21,16 @@ import { VehicleItem } from '@core/domain/mappers/vehicle.mapper';
   templateUrl: './home-page.html',
   styleUrl: './home-page.scss'
 })
-export class HomePage implements OnInit {
-  private readonly _destroyRef = inject(DestroyRef);
-  private readonly _homeVehiclesService = inject(HomeService);
-
-  data = this._homeVehiclesService.data;
-  isEmptyData = this._homeVehiclesService.isEmptyData;
-  totalElements = this._homeVehiclesService.totalElements;
-  filteredCount = this._homeVehiclesService.filteredCount;
-  isLoading = this._homeVehiclesService.isLoading;
-
-  ngOnInit(): void {
-    this._homeVehiclesService.loadVehicles()
-      .pipe(
-        takeUntilDestroyed(this._destroyRef))
-      .subscribe();
-  }
+export class HomePage {
+  private readonly _router = inject(Router);
+  readonly store = inject(VehicleStore);
 
   onSearch(value: string) {
-    this._homeVehiclesService.setSearchTerm(value);
+    this.store.setFilter({ ...this.store.filter(), description: value });
   }
 
   onRowSelected(row: VehicleItem) {
-    this._homeVehiclesService.navigateToDetailWithId(row.id);
+     this.store.setSelectedRow(row);
+     this._router.navigate(['/home', row.id]);
   }
 }

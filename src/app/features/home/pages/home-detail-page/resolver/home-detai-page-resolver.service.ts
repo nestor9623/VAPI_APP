@@ -4,6 +4,7 @@ import { VehicleItem } from '@core/domain/mappers/vehicle.mapper';
 import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router';
 import { GetVehicleTypesByIdUseCase } from '@core/application/use-cases/vehicle/get-vehicle-types-by-id.usecase';
 import { GetVehicleModelsByIdUseCase } from '@core/application/use-cases/vehicle/get-vehicle-models-by-id.usecase';
+import { DetailStore } from '@core/store/detail-store';
 
 export interface VehicleDetailData {
   models: VehicleItem[];
@@ -12,6 +13,7 @@ export interface VehicleDetailData {
 
 @Injectable({ providedIn: 'root' })
 export class HomeDetailResolver implements Resolve<VehicleDetailData | null> {
+  private readonly _detailStore = inject(DetailStore);
   private readonly _getVehicleModelsUseCase = inject(GetVehicleModelsByIdUseCase);
   private readonly _getVehicleTypesUseCase = inject(GetVehicleTypesByIdUseCase);
   private readonly _router = inject(Router);
@@ -35,12 +37,17 @@ export class HomeDetailResolver implements Resolve<VehicleDetailData | null> {
       types: this._getVehicleTypesUseCase.execute(vehicleId),
       models: this._getVehicleModelsUseCase.execute(vehicleId),
     }).pipe(
-      map(({ models, types }) => ({
-        models: models.Results,
-        types: types.Results
-      })),
+      map(({ models, types }) => {
+        this._detailStore.setModelos(models.Results);
+        this._detailStore.setTipos(types.Results);
+        return {
+          models: models.Results,
+          types: types.Results
+        };
+      }),
       catchError((error) => {
         console.error('Error al cargar datos del vehículo:', error);
+        this._detailStore.reset();
         this._navigateToHome();
         return of(null);
       })
