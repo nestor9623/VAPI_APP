@@ -1,59 +1,103 @@
-# VAPIAPP
+# 🚗 VAPIAPP
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.3.
+> **Aplicación de gestión de vehículos** desarrollada con las últimas tecnologías de Angular.
 
-## Development server
+---
+##  Autogenerate
+--**IA** : Este fichero readme ha sido autogenerado.
+## 🛠️ Tecnologías y Características
 
-To start a local development server, run:
+- **Angular 21**: Proyecto basado en la versión más reciente, aprovechando las nuevas APIs y mejoras de rendimiento.
+- **Signal y SignalStore**: Gestión reactiva del estado de la aplicación usando las nuevas señales de Angular y SignalStore para un flujo de datos eficiente y moderno.
+- **Cypress**: Pruebas end-to-end robustas y automatizadas para garantizar la calidad de la aplicación.
+- **Test unitarios**: Estructura preparada para pruebas unitarias.
+- **SCSS**: Estilos modernos y organizados.
+- **Viewport personalizado**: Implementación de un componente de visualización de datos (viewport) en vez de una tabla tradicional, optimizando la experiencia de usuario y el rendimiento en grandes volúmenes de datos.
+- **Arquitectura modular**: Separación clara por dominios, features, core, shared y assets.
+
+---
+
+## 📁 Estructura del Proyecto
+
+```
+src/
+	app/
+		core/           # Lógica de dominio, repositorios, entidades, casos de uso
+		features/       # Features principales (home, páginas, servicios)
+		shared/         # Componentes reutilizables (filtros, header, spinner, viewport)
+		assets/         # Recursos estáticos y mocks
+		environments/   # Configuración de entornos
+	index.html
+	main.ts
+	styles.scss
+public/
+cypress/            # Pruebas E2E con Cypress
+```
+
+---
+
+## 🚀 Comandos Útiles
+
+### Servidor de desarrollo
 
 ```bash
 ng serve
 ```
+Accede a [http://localhost:4200/](http://localhost:4200/) para ver la app en acción.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### Generar componentes, servicios, etc.
 
 ```bash
-ng generate component component-name
+ng generate component nombre-componente
+ng generate service nombre-servicio
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+### Construir la aplicación
 
 ```bash
 ng build
 ```
+Los artefactos se generan en la carpeta `dist/`.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+### Ejecutar tests unitarios
 
 ```bash
 ng test
 ```
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+### Ejecutar tests E2E (Cypress)
 
 ```bash
-ng e2e
+npx cypress open
 ```
+Las pruebas E2E están ubicadas en la carpeta `cypress/e2e/`.
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+---
 
-## Additional Resources
+## 🧩 Componentes y Features Destacados
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- **Filtro avanzado**: Componente de filtrado reutilizable para búsquedas dinámicas.
+- **Header y Spinner**: Componentes visuales reutilizables.
+- **Viewport**: Componente propio para visualización de datos, reemplazando la tabla tradicional para mejor rendimiento y UX.
+- **Gestión de estado con SignalStore**: Uso de signals y stores para un manejo reactivo y eficiente del estado.
+
+---
+
+## 📝 Notas y Buenas Prácticas
+
+- Estructura basada en buenas prácticas de Angular 21.
+- Uso extensivo de tipado y entidades para robustez.
+- Separación clara entre lógica de dominio, infraestructura y presentación.
+- Mock de datos en `assets/mock/vehicle/` para desarrollo y pruebas.
+
+---
+
+## 📚 Recursos
+
+- [Angular CLI Docs](https://angular.dev/tools/cli)
+- [Cypress Docs](https://docs.cypress.io/)
+- [Angular Signals](https://angular.dev/reference/signals)
+
+---
+
+<sub>Desarrollado con ❤️ por el equipo VAPIAPP</sub>
